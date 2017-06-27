@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+        jcenter()
         mavenCentral()
         maven {
             name = "forge"
@@ -11,43 +12,38 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath "net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT"
     }
 }
 
-apply plugin: 'forge'
+apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'maven'
+group = "enviromine"
+archivesBaseName = "Enviromine"
 
-version = "FWG_EM_VER"
-group= "enviromine" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "EnviroMine"
-
+sourceCompatibility = targetCompatibility = "1.8"
+version = "${mc_version}-${mod_version}"
 minecraft {
-    version = "1.7.10-10.13.0.1180"
+    version = mc_version + "-" + forge_version
+    mappings = mcp_mappings
+    runDir = "run"
+    makeObfSourceJar = false
 }
 
-dependencies {
-}
-
-processResources
-{
+processResources {
     inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
-    
+    inputs.property "mc_version", mc_version
+
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+        expand 'version': project.version, 'mc_version': mc_version
     }
-    
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
-    }
+    rename '(.+_at.cfg)', 'META-INF/$1'
 }
 
-task deobfJar(type: Jar) {
-        from sourceSets.main.output
-        appendix = 'deobf'
-}
- 
-artifacts {
-        archives deobfJar
+jar {
+    classifier = 'universal'
+    manifest {
+        attributes 'FMLAT': 'avaritia_at.cfg'
+    }
 }
