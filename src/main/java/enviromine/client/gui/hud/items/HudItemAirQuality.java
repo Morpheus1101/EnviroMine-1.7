@@ -1,9 +1,8 @@
 package enviromine.client.gui.hud.items;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.math.MathHelper;
 import org.lwjgl.opengl.GL11;
 import enviromine.client.gui.Gui_EventManager;
 import enviromine.client.gui.UI_Settings;

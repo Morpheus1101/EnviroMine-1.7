@@ -2,26 +2,24 @@ package enviromine.blocks;
 
 import java.util.ArrayList;
 import java.util.List;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import enviromine.blocks.tiles.TileEntityElevator;
 import enviromine.core.EM_Settings;
 import enviromine.handlers.EnviroAchievements;
 import enviromine.handlers.ObjectHandler;
 import enviromine.handlers.TeleportHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockElevator extends Block implements ITileEntityProvider
 {

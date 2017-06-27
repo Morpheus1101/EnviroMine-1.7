@@ -1,7 +1,5 @@
 package enviromine.client.gui.hud.items;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.item.ItemStack;
@@ -10,6 +8,8 @@ import enviromine.client.gui.UI_Settings;
 import enviromine.client.gui.hud.OverlayHandler;
 import enviromine.handlers.ObjectHandler;
 import enviromine.utils.RenderAssist;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GasMaskHud 
@@ -26,7 +26,7 @@ public class GasMaskHud
     {
         ScaledResolution scaledresolution = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
         
-    	ItemStack itemstack = mc.thePlayer.inventory.armorItemInSlot(3);
+    	ItemStack itemstack = mc.player.inventory.armorItemInSlot(3);
 		
 		if(itemstack != null && itemstack.getItem() != null)
 		{
@@ -66,7 +66,7 @@ public class GasMaskHud
 			{
 				if(UI_Settings.breathSound == true)
 				{
-					mc.thePlayer.playSound("enviromine:gasmask",  UI_Settings.breathVolume, 1.0F);
+					mc.player.playSound("enviromine:gasmask",  UI_Settings.breathVolume, 1.0F);
 				}
 			}
 		}

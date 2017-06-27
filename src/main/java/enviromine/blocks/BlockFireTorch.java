@@ -1,17 +1,10 @@
 package enviromine.blocks;
 
-import static net.minecraftforge.common.util.ForgeDirection.DOWN;
-import static net.minecraftforge.common.util.ForgeDirection.EAST;
-import static net.minecraftforge.common.util.ForgeDirection.NORTH;
-import static net.minecraftforge.common.util.ForgeDirection.SOUTH;
-import static net.minecraftforge.common.util.ForgeDirection.UP;
-import static net.minecraftforge.common.util.ForgeDirection.WEST;
 import java.util.Random;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import enviromine.core.EM_Settings;
 import enviromine.handlers.ObjectHandler;
 import net.minecraft.block.BlockTorch;
+import net.minecraft.client.renderer.EnumFaceDirection;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -19,7 +12,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockFireTorch extends BlockTorch
 {
@@ -34,7 +28,7 @@ public class BlockFireTorch extends BlockTorch
 	@Override
     public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_)
     {
-		return this.isLit? Item.getItemFromBlock(Blocks.torch) : Items.stick;
+		return this.isLit? Item.getItemFromBlock(Blocks.TORCH) : Items.STICK;
     }
 
     /**
@@ -52,7 +46,7 @@ public class BlockFireTorch extends BlockTorch
 	{
 		ItemStack stack = player.getEquipmentInSlot(0);
 		
-		if (stack != null && stack.getItem() == Items.flint_and_steel)
+		if (stack != null && stack.getItem() == Items.FLINT_AND_STEEL)
 		{
 			stack.damageItem(1, player);
 			world.setBlock(i, j, k, ObjectHandler.fireTorch, world.getBlockMetadata(i, j, k), 3);
@@ -67,7 +61,7 @@ public class BlockFireTorch extends BlockTorch
 		// Reset the torch back to vanilla
 		if(!EM_Settings.torchesBurn && !EM_Settings.torchesGoOut)
 		{
-			world.setBlock(x, y, z, Blocks.torch, world.getBlockMetadata(x, y, z), 3);
+			world.setBlock(x, y, z, Blocks.TORCH, world.getBlockMetadata(x, y, z), 3);
 			return;
 		}
 		
@@ -139,7 +133,7 @@ public class BlockFireTorch extends BlockTorch
                                     k2 = 15;
                                 }
 
-                                world.setBlock(i1, k1, j1, Blocks.fire, k2, 3);
+                                world.setBlock(i1, k1, j1, Blocks.FIRE, k2, 3);
                             }
                         }
                     }

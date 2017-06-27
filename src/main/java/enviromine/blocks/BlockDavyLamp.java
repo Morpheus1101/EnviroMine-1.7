@@ -2,24 +2,22 @@ package enviromine.blocks;
 
 import java.util.ArrayList;
 import java.util.List;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import enviromine.blocks.tiles.TileEntityDavyLamp;
 import enviromine.gases.EnviroGas;
 import enviromine.gases.EnviroGasDictionary;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
 
 public class BlockDavyLamp extends Block implements ITileEntityProvider
 {
@@ -75,7 +73,7 @@ public class BlockDavyLamp extends Block implements ITileEntityProvider
 	{
 		ItemStack stack = player.getEquipmentInSlot(0);
 		
-		if (stack != null && stack.getItem() == Items.flint_and_steel && world.getBlockMetadata(i, j, k) == 0)
+		if (stack != null && stack.getItem() == Items.FLINT_AND_STEEL && world.getBlockMetadata(i, j, k) == 0)
 		{
 			stack.damageItem(1, player);
 			world.setBlockMetadataWithNotify(i, j, k, 1, 2);

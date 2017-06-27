@@ -1,29 +1,20 @@
 package enviromine.client.gui;
 
-import java.util.Iterator;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiIngameMenu;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
-import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.GuiScreenEvent.ActionPerformedEvent;
 import net.minecraftforge.client.event.GuiScreenEvent.InitGuiEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
-
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.Level;
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.config.GuiConfig;
-import cpw.mods.fml.client.config.IConfigElement;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import enviromine.client.gui.hud.HUDRegistry;
 import enviromine.client.gui.hud.HudItem;
 import enviromine.client.gui.hud.items.Debug_Info;
@@ -54,12 +45,12 @@ public class Gui_EventManager
 	@SubscribeEvent
 	public void renderevent(InitGuiEvent.Post event)
 	{
-		width = event.gui.width;
-		height = event.gui.height;
+		width = event.getGui(width);
+		height = event.getGui(height);
 		
 		if(event.gui instanceof GuiIngameMenu && !EM_Settings.voxelMenuExists)
 		{
-			String newPost = UpdateNotification.isNewPost() ? " " + StatCollector.translateToLocal("news.enviromine.newpost") : "";
+			String newPost = UpdateNotification.isNewPost() ? " " + net.minecraft.util.text.translation.I18n.translateToLocal("news.enviromine.newpost") : "";
 
 			try
 			{
@@ -113,23 +104,23 @@ public class Gui_EventManager
 			return;
 		}
 		
-		mc.thePlayer.yOffset = 1.62F;
-		if(ClientQuake.GetQuakeShake(mc.theWorld, mc.thePlayer) > 0)
+		mc.player.yOffset = 1.62F;
+		if(ClientQuake.GetQuakeShake(mc.world, mc.player) > 0)
 		{
-			if(mc.thePlayer == null || mc.thePlayer.isPlayerSleeping() || !mc.thePlayer.onGround || (mc.currentScreen != null && mc.currentScreen.doesGuiPauseGame()))
+			if(mc.player == null || mc.player.isPlayerSleeping() || !mc.player.onGround || (mc.currentScreen != null && mc.currentScreen.doesGuiPauseGame()))
 			{
 			} else
 			{
-				float shakeMult = ClientQuake.GetQuakeShake(mc.theWorld, mc.thePlayer);
+				float shakeMult = ClientQuake.GetQuakeShake(mc.world, mc.player);
 				
 				double shakeSpeed = 2D * shakeMult;
 				float offsetY = 0.2F * shakeMult;
 				
-				double shake = (int)(mc.theWorld.getTotalWorldTime() % 24000L) * shakeSpeed;
+				double shake = (int)(mc.world.getTotalWorldTime() % 24000L) * shakeSpeed;
 				
-				mc.thePlayer.yOffset -= (Math.sin(shake) * (offsetY / 2F)) + (offsetY / 2F);
-				mc.thePlayer.cameraPitch = (float)(Math.sin(shake) * offsetY / 4F);
-				mc.thePlayer.cameraYaw = (float)(Math.sin(shake) * offsetY / 4F);
+				mc.player.yOffset -= (Math.sin(shake) * (offsetY / 2F)) + (offsetY / 2F);
+				mc.player.cameraPitch = (float)(Math.sin(shake) * offsetY / 4F);
+				mc.player.cameraYaw = (float)(Math.sin(shake) * offsetY / 4F);
 			}
 		}
 		
@@ -140,7 +131,7 @@ public class Gui_EventManager
 			if(!(EM_Settings.enableAirQ == false && EM_Settings.enableBodyTemp == false && EM_Settings.enableHydrate == false && EM_Settings.enableSanity == false))
 			{
 				//Minecraft.getMinecraft().fontRenderer.drawStringWithShadow("NO ENVIRONMENT DATA", xPos, (height - yPos) - 8, 16777215);
-				tracker = EM_StatusManager.lookupTrackerFromUsername(this.mc.thePlayer.getCommandSenderName());
+				tracker = EM_StatusManager.lookupTrackerFromUsername(this.mc.player.getCommandSenderName());
 			} 
 		} else if(tracker.isDisabled || !EM_StatusManager.trackerList.containsValue(tracker))
 		{
@@ -170,7 +161,7 @@ public class Gui_EventManager
 					continue;
 				}
 
-				if(mc.thePlayer.ridingEntity instanceof EntityLivingBase)
+				if(mc.player.ridingEntity instanceof EntityLivingBase)
 				{
 					if(huditem.shouldDrawOnMount())
 					{

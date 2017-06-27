@@ -9,10 +9,9 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 import enviromine.blocks.tiles.TileEntityGas;
 import enviromine.core.EM_Settings;
 import enviromine.gases.EnviroGasDictionary;
@@ -29,14 +28,14 @@ public class BlockFlammableCoal extends BlockOre
 	@Override
 	public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_)
     {
-        return Items.coal;
+        return Items.COAL;
     }
 	
 	@Override
 	public ItemStack createStackedBlock(int meta)
 	{
         int j = 0;
-        Item item = Item.getItemFromBlock(Blocks.coal_ore);
+        Item item = Item.getItemFromBlock(Blocks.COAL_ORE);
 
         if (item != null && item.getHasSubtypes())
         {

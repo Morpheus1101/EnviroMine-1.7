@@ -3,7 +3,6 @@ package enviromine.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,14 +10,10 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import enviromine.blocks.tiles.TileEntityGas;
 import enviromine.core.EM_Settings;
 import enviromine.gases.EnviroGas;
@@ -26,6 +21,8 @@ import enviromine.gases.EnviroGasDictionary;
 import enviromine.gases.GasBuffer;
 import enviromine.handlers.ObjectHandler;
 import enviromine.utils.EnviroUtils;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -71,9 +68,9 @@ public class BlockGas extends Block implements ITileEntityProvider
 				
 				Block sBlock = world.getBlock(xOff, yOff, zOff);
 				
-				if((sBlock.isFlammable(world, xOff, yOff, zOff, ForgeDirection.VALID_DIRECTIONS[dir].getOpposite()) && !(sBlock instanceof BlockGas)) || sBlock == Blocks.air)
+				if((sBlock.isFlammable(world, xOff, yOff, zOff, ForgeDirection.VALID_DIRECTIONS[dir].getOpposite()) && !(sBlock instanceof BlockGas)) || sBlock == Blocks.AIR)
 				{
-					world.setBlock(xOff, yOff, zOff, Blocks.fire, 0, 3);
+					world.setBlock(xOff, yOff, zOff, Blocks.FIRE, 0, 3);
 				}
 			}
 		}
@@ -589,7 +586,7 @@ public class BlockGas extends Block implements ITileEntityProvider
     {
     	if(world.isBlockNormalCubeDefault(x, y - 1, z, false) && this == ObjectHandler.fireGasBlock)
     	{
-    		world.setBlock(x, y, z, Blocks.fire);
+    		world.setBlock(x, y, z, Blocks.FIRE);
     	}
     	
 

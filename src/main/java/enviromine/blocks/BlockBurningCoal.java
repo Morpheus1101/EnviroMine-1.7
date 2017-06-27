@@ -1,11 +1,6 @@
 package enviromine.blocks;
 
-import static net.minecraftforge.common.util.ForgeDirection.DOWN;
-import static net.minecraftforge.common.util.ForgeDirection.EAST;
-import static net.minecraftforge.common.util.ForgeDirection.NORTH;
-import static net.minecraftforge.common.util.ForgeDirection.SOUTH;
-import static net.minecraftforge.common.util.ForgeDirection.UP;
-import static net.minecraftforge.common.util.ForgeDirection.WEST;
+
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -15,14 +10,13 @@ import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import enviromine.blocks.tiles.TileEntityBurningCoal;
 import enviromine.blocks.tiles.TileEntityGas;
 import enviromine.core.EM_Settings;
 import enviromine.gases.EnviroGasDictionary;
 import enviromine.handlers.ObjectHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockBurningCoal extends Block implements ITileEntityProvider
 {
@@ -121,7 +115,7 @@ public class BlockBurningCoal extends Block implements ITileEntityProvider
         	
         	if(coalTile.fuel <= 0)
         	{
-        		world.setBlock(x, y, z, Blocks.air, 0, 2);
+        		world.setBlock(x, y, z, Blocks.AIR, 0, 2);
         		return;
         	}
         }
@@ -178,7 +172,7 @@ public class BlockBurningCoal extends Block implements ITileEntityProvider
 
     public void breakBlock(World world, int x, int y, int z, Block block, int meta)
     {
-    	world.setBlock(x, y, z, Blocks.fire);
+    	world.setBlock(x, y, z, Blocks.FIRE);
 		/*TileEntity tile = world.getTileEntity(x, y, z);
 		
 		if(tile != null && tile instanceof TileEntityGas)
@@ -195,7 +189,7 @@ public class BlockBurningCoal extends Block implements ITileEntityProvider
 
         if (random.nextInt(p_149841_5_) < j1)
         {
-            boolean flag = world.getBlock(x, y, z) == Blocks.tnt;
+            boolean flag = world.getBlock(x, y, z) == Blocks.TNT;
 
             if (random.nextInt(chance + 10) < 5 && !world.canLightningStrikeAt(x, y, z))
             {
@@ -206,7 +200,7 @@ public class BlockBurningCoal extends Block implements ITileEntityProvider
                     k1 = 15;
                 }
 
-                world.setBlock(x, y, z, Blocks.fire, k1, 3);
+                world.setBlock(x, y, z, Blocks.FIRE, k1, 3);
             }
             else
             {
@@ -215,7 +209,7 @@ public class BlockBurningCoal extends Block implements ITileEntityProvider
 
             if (flag)
             {
-                Blocks.tnt.onBlockDestroyedByPlayer(world, x, y, z, 1);
+                Blocks.TNT.onBlockDestroyedByPlayer(world, x, y, z, 1);
             }
         }
     }

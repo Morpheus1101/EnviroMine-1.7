@@ -4,15 +4,15 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import enviromine.client.gui.Gui_EventManager;
 import enviromine.client.gui.UI_Settings;
 import enviromine.core.EM_Settings;
 import enviromine.utils.EnviroUtils;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class Debug_Info 
 {

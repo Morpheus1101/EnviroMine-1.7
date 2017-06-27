@@ -1,10 +1,10 @@
 package enviromine.client.gui.hud;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.util.ResourceLocation;
 import enviromine.client.gui.Gui_EventManager;
 import enviromine.utils.RenderAssist;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class OverlayHandler
